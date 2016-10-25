@@ -27,7 +27,9 @@ class UPSTrackingSystem(TrackingSystem):
         #Thats radical!
         self.state["Planowane doręczenie"] = site.find("label", text = "Planowane doręczenie:").find_parent().find_parent().find("dd").text
 
-        for row in table:
+        for (i, row) in enumerate(table):
             data = row.find_all("td")
             data = list(map(lambda x: " ".join(x.text.split()), data))
+            if len(data[0]) == 0 and len(self.events) > 0:
+                data[0] = self.events[-1].place
             self.events.append(Event("%s %s" % (data[1], data[2]), data[0], data[3]))
