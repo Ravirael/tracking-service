@@ -30,4 +30,4 @@ class PocztaPolskaTrackingSystem(TrackingSystem):
 			description = el['nazwa']
 			if el['przyczyna'] != 'null': description += " (%s)" % el['przyczyna']
 			self.events.append(Event(el['czasZadrzenia'], el['daneSzczegJednostki'], description))
-		self.events = list(reversed(self.events))
+		self.events.reverse()
